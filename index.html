@@ -1,0 +1,687 @@
+<!doctype html>
+<html lang="en" class="design-b">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tiny Consent - For Webflow</title>
+  <link rel="icon" href="./logo.svg" type="image/svg+xml" />
+  <meta name="description" content="A cookie banner that is a native Webflow element. Paste it, select it, restyle it like anything else on the canvas." />
+  <script src="./dist/tiny-consent.js" data-tc-region="eu" data-tc-reload="false" data-tc-vendors="google-analytics, meta-pixel, intercom"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:wght@400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="./tiny-consent-theme.css" />
+  <link rel="stylesheet" href="./demo.css" />
+  <link rel="stylesheet" href="./docs.css" />
+  <link rel="stylesheet" href="./b.css" />
+</head>
+<body>
+  <a class="doc-skip" href="#setup">Skip to setup</a>
+  <div class="b-board">
+    <header class="b-header">
+      <div class="b-pad b-header_row">
+        <div class="b-brand">
+          <a class="b-logo" href="./">
+            <svg class="b-logo_mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+              <defs><mask id="tc-bite"><rect width="32" height="32" fill="#fff"/><circle cx="25.2" cy="16" r="7.2" fill="#000"/></mask></defs>
+              <circle cx="13.5" cy="16" r="12" fill="currentColor" mask="url(#tc-bite)"/>
+            </svg>
+            <span>Tiny Consent</span>
+          </a>
+          <a class="b-by b-by--lockup" href="https://povio.com" target="_blank" rel="noopener" aria-label="by Povio">
+            <span>by</span>
+            <svg class="b-by_logo" viewBox="0 0 82 32" aria-hidden="true" focusable="false">
+              <path d="M10.1738 5.44751C15.2203 5.44751 19.3309 9.75897 19.3477 15.0227C19.3475 20.3532 15.237 24.6809 10.1738 24.6809C7.46687 24.6642 4.94347 23.428 3.27246 21.3059V32.0002H1V15.0393C1 9.7589 5.11067 5.44757 10.1738 5.44751ZM10.1738 7.76977C6.36394 7.76984 3.27246 11.0289 3.27246 15.0393C3.27257 19.0998 6.36401 22.4084 10.1738 22.4084C13.967 22.4084 17.0584 19.0998 17.0752 15.0393C17.0752 11.0288 13.9838 7.76977 10.1738 7.76977Z" fill="currentColor"/>
+              <path d="M46.4853 24.1963H48.5407L55.6259 6.04894H53.1694L47.5214 20.5702L41.8566 6.04894H39.4002L46.4686 24.1462L46.4853 24.1963Z" fill="currentColor"/>
+              <path d="M58.4499 0C57.5475 0 56.829 0.735252 56.829 1.6209C56.829 2.50654 57.5642 3.24179 58.4499 3.24179C59.3355 3.24179 60.0708 2.50654 60.0708 1.6209C60.0708 0.735252 59.3522 0 58.4499 0Z" fill="currentColor"/>
+              <path d="M57.2969 6.04894H59.5862V24.1629H57.2969V6.04894Z" fill="currentColor"/>
+              <path d="M71.1831 5.44751C76.2463 5.44751 80.3735 9.80921 80.3735 15.1565C80.3734 20.4368 76.2295 24.7307 71.1831 24.7307C66.1367 24.7307 62.0261 20.4368 62.0259 15.1565C62.0259 9.80921 66.1366 5.44751 71.1831 5.44751ZM71.1831 7.65356C67.3899 7.65356 64.2983 11.0291 64.2983 15.1565C64.2986 19.2169 67.39 22.5256 71.1831 22.5256C74.9762 22.5256 78.0676 19.2169 78.0679 15.1565C78.0679 11.0124 74.9763 7.65358 71.1831 7.65356Z" fill="currentColor"/>
+              <path d="M30.3934 5.44751C35.4733 5.44751 39.5838 9.80921 39.5838 15.1565C39.5836 20.4368 35.4398 24.7307 30.3934 24.7307C25.347 24.7307 21.2363 20.4368 21.2361 15.1565C21.2361 9.80921 25.3469 5.44751 30.3934 5.44751ZM30.3934 7.65356C26.6002 7.65359 23.5086 11.0291 23.5086 15.1565C23.5088 19.2169 26.6003 22.5256 30.3934 22.5256C34.2032 22.5256 37.2779 19.2169 37.2781 15.1565C37.2781 11.0123 34.1866 7.65356 30.3934 7.65356Z" fill="currentColor"/>
+            </svg>
+          </a>
+        </div>
+        <nav class="b-nav" aria-label="Page">
+          <a href="#setup">Setup</a>
+          <a href="#component">Component</a>
+          <a href="#publish">Test</a>
+          <button type="button" class="b-btn b-btn--small" data-preview="launch">Live preview</button>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="b-pad">
+        <section class="b-hero">
+          <div>
+            <h1 class="b-h1">Cookie consent for Webflow sites you build.</h1>
+            <div class="b-actions">
+              <a class="b-btn" href="#head">Start with step 1</a>
+              <button type="button" class="b-btn b-btn--ghost" data-preview="launch">Preview the banner</button>
+            </div>
+          </div>
+
+          <div class="b-select" id="hero-demo">
+            <span class="b-select_tag">div.tc-banner</span>
+            <span class="b-handle b-handle--nw" aria-hidden="true"></span>
+            <span class="b-handle b-handle--n" aria-hidden="true"></span>
+            <span class="b-handle b-handle--ne" aria-hidden="true"></span>
+            <span class="b-handle b-handle--sw" aria-hidden="true"></span>
+            <span class="b-handle b-handle--s" aria-hidden="true"></span>
+            <span class="b-handle b-handle--se" aria-hidden="true"></span>
+            <div class="b-stage">
+              <div class="tc-banner" role="group" aria-label="Example cookie banner">
+                <div class="tc-banner_body">
+                  <div class="tc-brand">
+                    <span class="tc-brand_mark" aria-hidden="true"></span>
+                    <h2 class="tc-title">We use cookies</h2>
+                  </div>
+                  <p class="tc-text">Essential cookies keep the site working. With your permission we also use analytics, marketing, and personalization cookies. You can change your choice at any time.</p>
+                  <span class="tc-link">Privacy policy</span>
+                </div>
+                <div class="tc-actions">
+                  <button type="button" class="tc-button tc-button--ghost" data-preview="launch">Reject all</button>
+                  <button type="button" class="tc-button tc-button--ghost" data-preview="launch-preferences">Preferences</button>
+                  <button type="button" class="tc-button" data-preview="launch">Accept all</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <ul class="b-facts" aria-label="At a glance">
+          <li>12 KB gzipped, from jsDelivr</li>
+          <li>One first-party cookie</li>
+          <li>GDPR, CCPA, or no banner</li>
+          <li>Honors Global Privacy Control</li>
+          <li>Six steps, about 5 min</li>
+          <li>No account</li>
+        </ul>
+      </div>
+
+  <section class="doc-setup" id="setup">
+      <aside class="doc-rail" aria-label="Setup checklist">
+        <div class="doc-rail_inner">
+          <div class="doc-rail_head">
+            <span class="doc-rail_title">Setup checklist</span>
+            <span class="doc-rail_count" id="rail-count">0 of 6 done</span>
+          </div>
+          <div class="doc-rail_bar" aria-hidden="true"><span id="rail-progress"></span></div>
+          <ol class="doc-rail_list" id="rail">
+            <li class="doc-rail_item" data-step="head">
+              <input class="doc-rail_check" type="checkbox" id="done-head" aria-label="Mark step 1, add the head code, as done" />
+              <a class="doc-rail_link" href="#head"><span class="doc-rail_num">1</span><span class="doc-rail_name">Add the head code</span><span class="doc-rail_time">1 min</span></a>
+            </li>
+            <li class="doc-rail_item" data-step="scan">
+              <input class="doc-rail_check" type="checkbox" id="done-scan" aria-label="Mark step 2, scan the site, as done" />
+              <a class="doc-rail_link" href="#scan"><span class="doc-rail_num">2</span><span class="doc-rail_name">Scan the site</span><span class="doc-rail_time">1 min</span></a>
+            </li>
+            <li class="doc-rail_item" data-step="trackers">
+              <input class="doc-rail_check" type="checkbox" id="done-trackers" aria-label="Mark step 3, tag your trackers, as done" />
+              <a class="doc-rail_link" href="#trackers"><span class="doc-rail_num">3</span><span class="doc-rail_name">Tag your trackers</span><span class="doc-rail_time">1 min</span></a>
+            </li>
+            <li class="doc-rail_item" data-step="component">
+              <input class="doc-rail_check" type="checkbox" id="done-component" aria-label="Mark step 4, paste the component, as done" />
+              <a class="doc-rail_link" href="#component"><span class="doc-rail_num">4</span><span class="doc-rail_name">Paste component</span><span class="doc-rail_time">1 min</span></a>
+            </li>
+            <li class="doc-rail_item" data-step="footer-link">
+              <input class="doc-rail_check" type="checkbox" id="done-footer-link" aria-label="Mark step 5, add a cookie settings link, as done" />
+              <a class="doc-rail_link" href="#footer-link"><span class="doc-rail_num">5</span><span class="doc-rail_name">Cookie settings link</span><span class="doc-rail_time">1 min</span></a>
+            </li>
+            <li class="doc-rail_item" data-step="publish">
+              <input class="doc-rail_check" type="checkbox" id="done-publish" aria-label="Mark step 6, publish and test, as done" />
+              <a class="doc-rail_link" href="#publish"><span class="doc-rail_num">6</span><span class="doc-rail_name">Publish and test</span><span class="doc-rail_time">1 min</span></a>
+            </li>
+          </ol>
+          <button type="button" class="doc-rail_reset" id="rail-reset" hidden>Clear checklist</button>
+        </div>
+      </aside>
+
+      <ol class="doc-steps">
+
+        <!-- Step 1 -->
+        <li class="doc-step" id="head" data-step="head">
+          <header class="doc-step_head">
+            <span class="doc-step_num" aria-hidden="true">1</span>
+            <div class="doc-step_titles">
+              <h2>Add the head code</h2>
+              <p class="doc-step_meta"><span class="doc-step_time">1 min</span><span class="doc-step_where">Site settings → Custom code → Head code</span></p>
+            </div>
+          </header>
+          <p>
+            Copy the snippet and paste it as the <strong>first thing</strong> in Head code, above every analytics or
+            pixel snippet, with no <code>async</code> or <code>defer</code>.
+          </p>
+          <form class="doc-config" id="config">
+            <label>
+              <span>Rules</span>
+              <select name="mode">
+                <option value="opt-in">Everyone: opt-in banner (GDPR rules for all visitors)</option>
+                <option value="geo">By region: GDPR banner in Europe, opt-out notice in US privacy states, none elsewhere</option>
+                <option value="geo-timezone">By region, timezone only: same rules, no IP lookup, coarser</option>
+                <option value="opt-out">Everyone: opt-out notice (CCPA rules for all visitors)</option>
+              </select>
+            </label>
+            <label>
+              <span>Cookie lifetime (days)</span>
+              <input type="number" name="days" value="180" min="1" max="730" />
+            </label>
+            <label>
+              <span>Extra hosts to block <small>optional, <code>host:category</code>, comma separated</small></span>
+              <input type="text" name="block" placeholder="cdn.example.com:analytics, pixel.example.com" />
+            </label>
+          </form>
+          <div class="doc-code">
+            <pre><code id="head-snippet"></code></pre>
+            <button type="button" class="doc-copy" data-copy="#head-snippet">Copy</button>
+          </div>
+          <div class="doc-callout">
+            <p>
+              Use <strong>site-level</strong> head code, not page settings, so the script runs on every page. Tags added
+              under <strong>Apps &amp; Integrations</strong> (the Google Analytics and Facebook Pixel fields) load before
+              custom code and cannot be blocked; paste those snippets into Head code instead.
+            </p>
+          </div>
+          <details class="doc-details" id="geo-details">
+            <summary>Rules by region: how geolocation works</summary>
+            <p>
+                With <code>data-tc-geo</code> the script starts strict on every page view (nothing optional runs, no
+                banner), finds out where the visitor is, then applies the rule for that region. A choice the visitor
+                already made always wins; if the region cannot be determined the visitor gets the opt-in banner.
+              </p>
+              <ul class="doc-list">
+                <li><strong>opt-in</strong> (EU/EEA, UK, Switzerland, Brazil, Quebec): trackers wait, the banner asks.</li>
+                <li><strong>opt-out</strong> (California and the other US states with a privacy law): trackers run, the banner is a notice with <em>Do not sell or share</em>. A Global Privacy Control signal turns marketing off regardless.</li>
+                <li><strong>none</strong> (everywhere else): no banner; the Preferences button stays so anyone can still opt out.</li>
+              </ul>
+              <p>
+                Override the table with <code>data-tc-regions</code>, most specific key wins:
+                <code>data-tc-regions="eu:opt-in, gb:opt-in, us-ca:opt-out, *:opt-in"</code> asks everyone outside the
+                listed regions too. Keys are country codes (<code>de</code>), country-region (<code>us-ca</code>,
+                <code>ca-qc</code>), the group <code>eu</code>, or <code>*</code>.
+              </p>
+              <p>
+                <code>auto</code> asks <a href="https://www.geojs.io/" target="_blank" rel="noopener">geojs.io</a> for the
+                visitor's country and region (one request per session, no cookies, result kept in
+                <code>sessionStorage</code>) and falls back to the browser timezone when that fails. Mention the lookup
+                in your privacy policy, or point <code>data-tc-geo-url</code> at your own endpoint. <code>timezone</code>
+                makes no request at all but only knows continents: European zones get the GDPR banner, US zones the
+                opt-out notice.
+              </p>
+              <p>
+                Test a region with <code>data-tc-region="us-ca"</code> on the script tag or
+                <code>TinyConsent.setRegion('de')</code> in the console. Copy the component after you pick the rules:
+                opt-in pastes the GDPR text and buttons, opt-out pastes the CCPA notice, and By region pastes both so
+                the script can switch.
+              </p>
+          </details>
+          <p class="doc-note">
+            This snippet is pinned to <code>@v1.0.0</code>. Use <code>@main</code> when a site should follow the latest build.
+          </p>
+        </li>
+
+        <!-- Step 2 -->
+        <li class="doc-step" id="scan" data-step="scan">
+          <header class="doc-step_head">
+            <span class="doc-step_num" aria-hidden="true">2</span>
+            <div class="doc-step_titles">
+              <h2>Scan the site</h2>
+              <p class="doc-step_meta"><span class="doc-step_time">1 min</span><span class="doc-step_where">This page</span></p>
+            </div>
+          </header>
+          <p>
+            Paste the live site address. The scan reads <code>sitemap.xml</code>, then the HTML of each page, and adds
+            every recognized tracker to the head snippet. On the published site those services show up in the preferences
+            panel on every page, including pages that do not contain the tag.
+          </p>
+          <form class="doc-scan" id="scan-form">
+            <label>
+              <span>Website</span>
+              <input type="text" name="url" inputmode="url" required placeholder="povio.com" autocomplete="url" spellcheck="false" />
+            </label>
+            <button type="submit" class="demo-btn">Scan</button>
+          </form>
+          <p class="doc-paste_status" id="scan-status" hidden></p>
+          <ul class="doc-scan_list" id="scan-list" hidden></ul>
+          <p class="doc-note">
+            When a page loads Google Tag Manager, the scan reads that container and includes the tags configured
+            there. A pixel that some other script injects only after the page runs is still invisible here. Tag that
+            in the next step, or add its id to <code>data-tc-vendors</code> yourself.
+          </p>
+        </li>
+
+        <!-- Step 3 -->
+        <li class="doc-step" id="trackers" data-step="trackers">
+          <header class="doc-step_head">
+            <span class="doc-step_num" aria-hidden="true">3</span>
+            <div class="doc-step_titles">
+              <h2>Tag your trackers</h2>
+              <p class="doc-step_meta"><span class="doc-step_time">1 min</span><span class="doc-step_where">Head code and Code Embed elements</span></p>
+            </div>
+          </header>
+          <p>
+            Four categories: <code>essential</code>, <code>analytics</code>, <code>marketing</code>, and
+            <code>personalization</code>. Essential always runs. For every other tracker, change three things in its snippet:
+          </p>
+          <ol class="doc-list doc-list--tight">
+            <li>Set <code>type="text/plain"</code> so the browser does not run it.</li>
+            <li>Rename <code>src</code> to <code>data-tc-src</code>.</li>
+            <li>Add <code>data-tc-category="analytics"</code> (or the category it belongs to).</li>
+          </ol>
+          <div class="doc-code">
+            <pre><code id="gtag-snippet">&lt;script type="text/plain" data-tc-src="https://www.googletagmanager.com/gtag/js?id=G-XXXX" data-tc-category="analytics"&gt;&lt;/script&gt;
+&lt;script type="text/plain" data-tc-category="analytics"&gt;
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-XXXX');
+&lt;/script&gt;</code></pre>
+            <button type="button" class="doc-copy" data-copy="#gtag-snippet">Copy</button>
+          </div>
+          <h3 class="doc-step_sub">Embeds</h3>
+          <p>
+            YouTube, Vimeo, and Google Maps go in a Code Embed element with <code>data-tc-src</code> instead of
+            <code>src</code>. An optional placeholder with the same category disappears once it is allowed.
+          </p>
+          <div class="doc-code">
+            <pre><code id="iframe-snippet">&lt;div data-tc-element="placeholder" data-tc-category="marketing"&gt;
+  This video loads after you allow marketing cookies.
+  &lt;a href="#" data-tc-element="open-preferences"&gt;Cookie settings&lt;/a&gt;
+&lt;/div&gt;
+&lt;iframe data-tc-src="https://www.youtube-nocookie.com/embed/VIDEO_ID" data-tc-category="marketing" allowfullscreen&gt;&lt;/iframe&gt;</code></pre>
+            <button type="button" class="doc-copy" data-copy="#iframe-snippet">Copy</button>
+          </div>
+          <div class="doc-callout">
+            <p>
+              Remove <code>&lt;noscript&gt;</code> fallbacks from tracker snippets. They fire without consent.
+            </p>
+          </div>
+          <details class="doc-details">
+            <summary>Good to know: untagged scripts, multiple categories</summary>
+            <p>
+              Scripts from known tracker hosts (Google Analytics, GTM, Meta, Hotjar, LinkedIn, TikTok, HubSpot, YouTube,
+              Intercom, and more) are blocked even when untagged, including ones injected later by other scripts. A tag that
+              lists two categories (<code>data-tc-category="analytics, marketing"</code>) runs only when both are allowed.
+            </p>
+          </details>
+        </li>
+
+        <!-- Step 4 -->
+        <li class="doc-step" id="component" data-step="component">
+          <header class="doc-step_head">
+            <span class="doc-step_num" aria-hidden="true">4</span>
+            <div class="doc-step_titles">
+              <h2>Paste the component into the Designer</h2>
+              <p class="doc-step_meta"><span class="doc-step_time">1 min</span><span class="doc-step_where">Designer → your footer</span></p>
+            </div>
+          </header>
+          <p>
+            One click puts the banner, the preferences panel, and the small Preferences button on your clipboard in
+            Webflow's own format: native elements, classes with the default theme, and every <code>data-tc</code>
+            attribute already set. Everything except three small icons is editable in the Style panel.
+          </p>
+          <div class="doc-paste">
+            <button type="button" class="demo-btn doc-paste_btn" id="copy-webflow" disabled>Copy component for Webflow</button>
+            <button type="button" class="demo-btn demo-btn--ghost" id="copy-embed" disabled>Copy as HTML embed</button>
+            <span class="doc-paste_status" id="paste-status">Preparing the payload…</span>
+          </div>
+          <h3 class="doc-step_sub">Then, in the Designer</h3>
+          <ol class="doc-list">
+            <li>Select the <strong>footer</strong> (or any component that is already on every page) and edit it so the paste lands inside.</li>
+            <li>Press <kbd>Cmd</kbd>+<kbd>V</kbd> (<kbd>Ctrl</kbd>+<kbd>V</kbd> on Windows). A <code>tc-root</code> div appears with the banner (bottom-right), the preferences panel, and the Preferences button (bottom-left).</li>
+            <li>Select <code>tc-banner</code>, <code>tc-dialog</code>, <code>tc-button</code>, and <code>tc-float</code> and swap the flat colors and fonts for your site's variables. Names, copy, and layout are free.</li>
+          </ol>
+          <details class="doc-details">
+            <summary>States and visibility while you work</summary>
+            <ul class="doc-list">
+              <li>Each optional category has a switch: a checkbox field (<code>tc-switch</code>) with an invisible input over a track and a knob. The script adds the combo class <code>is-on</code> to the switch and its children while the category is allowed, and <code>is-open</code> to an accordion, its toggles, and the chevron icon while it is open. Both combos arrive with the paste (the Analytics switch is on and the Essential row is open), so style the on and open states there.</li>
+              <li>Leave the banner visible in the Designer. On the published site the script hides it until it is needed. Hide the preferences panel and the Preferences button while you work and set them back to visible before publishing. Accordion bodies are visible in the Designer and start closed on the published site.</li>
+            </ul>
+          </details>
+          <details class="doc-details">
+            <summary>How the vendor list is built</summary>
+            <ul class="doc-list">
+              <li>Each category row is an accordion. Clicking the title or chevron opens the vendor list; each vendor opens its cookie table (name, purpose, duration).</li>
+              <li>The list is generated: on the published site the script scans the page for tracker scripts and embeds, matches them against a built-in registry (Google Analytics, Tag Manager, Meta Pixel, Google Ads, LinkedIn, TikTok, HubSpot, Hotjar, Clarity, YouTube, Vimeo, Intercom, and the rest of the block list) and clones the sample <code>tc-vendor</code> block once per match. Style the sample freely, but keep its <code>data-tc-vendor</code> and <code>data-tc-field</code> attributes. The <code>tc-row_empty</code> paragraph shows when nothing was found for a category.</li>
+              <li>Need a vendor the registry does not know, or a tag that fires server-side? Add it in Head code with <code>window.TinyConsentVendors = [{ id, name, category, privacy, hosts, cookies }]</code>, or force a known one with <code>data-tc-vendors="meta-pixel"</code> on the script tag. A hand-written block with its own <code>data-tc-vendor="some-id"</code> is kept as it is.</li>
+            </ul>
+          </details>
+          <details class="doc-details">
+            <summary>What the attributes do (keep these)</summary>
+            <div class="doc-table-wrap">
+              <table class="demo-table">
+                <thead><tr><th>Attribute</th><th>Where</th><th>Purpose</th></tr></thead>
+                <tbody>
+                  <tr><td><code>data-tc="root"</code></td><td>wrapper div</td><td>Everything must stay inside it.</td></tr>
+                  <tr><td><code>data-tc="banner"</code></td><td>banner div</td><td>Shown on first visit.</td></tr>
+                  <tr><td><code>data-tc="preferences"</code></td><td>panel div</td><td>Category panel. Hidden until opened.</td></tr>
+                  <tr><td><code>data-tc="float"</code></td><td>small button</td><td>Persistent "Preferences" button. Shown after a choice, hidden while the banner or panel is open.</td></tr>
+                  <tr><td><code>data-tc-action="accept-all"</code></td><td>button</td><td>Allow every category.</td></tr>
+                  <tr><td><code>data-tc-action="reject-all"</code></td><td>button</td><td>Deny every optional category.</td></tr>
+                  <tr><td><code>data-tc-action="open-preferences"</code></td><td>button</td><td>Open the panel.</td></tr>
+                  <tr><td><code>data-tc-action="save"</code></td><td>button</td><td>Store the switch selection.</td></tr>
+                  <tr><td><code>data-tc-action="close"</code></td><td>button, backdrop</td><td>Close the panel.</td></tr>
+                  <tr><td><code>data-tc-action="toggle"</code></td><td>chevron button, row title, vendor head</td><td>Opens and closes the accordion it sits in. An accordion can have several toggles; all of them reflect the state. A link inside a toggle (the privacy policy) still navigates. The chevron button covers keyboard users, so the title is a plain div; a lone div toggle needs <code>role="button"</code> and <code>tabindex="0"</code>.</td></tr>
+                  <tr><td><code>data-tc-category="…"</code></td><td>row div around each switch</td><td>Which category the checkbox inside controls. The visible title is yours to change. The Essential row has no switch, only a badge.</td></tr>
+                  <tr><td><code>data-tc-element="switch"</code></td><td>checkbox field</td><td>Gets the combo class <code>is-on</code> (together with its input, label, and knob) while the category is allowed.</td></tr>
+                  <tr><td><code>data-tc-element="accordion"</code></td><td>row div, vendor div</td><td>A collapsible box. The script sets <code>data-tc-open</code> and the combo class <code>is-open</code> on it.</td></tr>
+                  <tr><td><code>data-tc-element="details"</code></td><td>div inside an accordion</td><td>Hidden while the accordion is closed.</td></tr>
+                  <tr><td><code>data-tc-element="chevron"</code></td><td>icon inside the toggle</td><td>Gets <code>is-open</code> and rotates 180° while its accordion is open.</td></tr>
+                  <tr><td><code>data-tc-vendor="sample"</code></td><td>vendor div inside the row details</td><td>Template for the generated vendor cards; removed on the published site. Any other value marks a hand-written card that stays.</td></tr>
+                  <tr><td><code>data-tc-field="…"</code></td><td>inside the vendor template</td><td><code>vendor-name</code>, <code>vendor-privacy</code> (link), <code>cookie</code> (repeated per cookie), <code>cookie-name</code>, <code>cookie-purpose</code>, <code>cookie-duration</code>; <code>empty</code> on the per-row message.</td></tr>
+                  <tr><td><code>data-tc-variant="…"</code></td><td>banner text, buttons, anything</td><td>Marks copy for one rule: <code>opt-in</code>, <code>opt-out</code>, or <code>none</code>. The paste keeps only the rules you selected, so an opt-in component has the GDPR text, <em>Reject all</em>, and <em>Accept all</em>, and an opt-out component has the CCPA text, <em>Do not sell or share</em>, and <em>OK</em>. By region keeps every version.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </details>
+          <details class="doc-details">
+            <summary>If the paste does nothing</summary>
+            <p>
+              Webflow reads a specific clipboard format and changes it from time to time. Open the
+              <a href="./clipboard-inspector.html">clipboard inspector</a>, copy any element inside the Designer, and paste
+              there to see the exact MIME type and payload shape the Designer currently uses. Compare it with what this page
+              produces (the inspector shows that too). <strong>Copy as HTML embed</strong> is the fallback: paste it into a
+              Code Embed element. It works immediately, but the result is not styleable in the Designer.
+            </p>
+          </details>
+        </li>
+
+        <!-- Step 5 -->
+        <li class="doc-step" id="footer-link" data-step="footer-link">
+          <header class="doc-step_head">
+            <span class="doc-step_num" aria-hidden="true">5</span>
+            <div class="doc-step_titles">
+              <h2>Add a "Cookie settings" link</h2>
+              <p class="doc-step_meta"><span class="doc-step_time">1 min</span><span class="doc-step_where">Designer → footer link → Element settings → Custom attributes</span></p>
+            </div>
+          </header>
+          <p>
+            Visitors must be able to change their mind from any page. The component's Preferences button already covers
+            that. If you would rather have a plain footer link (or both), add a text link and give it one custom attribute:
+          </p>
+          <div class="doc-code">
+            <pre><code id="footer-snippet">data-tc-element = open-preferences</code></pre>
+            <button type="button" class="doc-copy" data-copy="#footer-snippet">Copy</button>
+          </div>
+        </li>
+
+        <!-- Step 6 -->
+        <li class="doc-step" id="publish" data-step="publish">
+          <header class="doc-step_head">
+            <span class="doc-step_num" aria-hidden="true">6</span>
+            <div class="doc-step_titles">
+              <h2>Publish and test</h2>
+              <p class="doc-step_meta"><span class="doc-step_time">1 min</span><span class="doc-step_where">Your .webflow.io staging domain, in a private window</span></p>
+            </div>
+          </header>
+          <p>Publish to staging first and walk through this list in a private window with DevTools open.</p>
+          <ul class="doc-checks">
+            <li>The banner shows and the Network tab lists no tracker requests.</li>
+            <li>After <strong>Accept all</strong>, trackers load, a <code>tc_consent</code> cookie exists, and the Preferences button appears bottom-left.</li>
+            <li>Reload: no banner, trackers load straight away, Preferences button still there.</li>
+            <li>Open preferences from that button, expand a row and a vendor, then <strong>Reject all</strong>: the tracker cookies (<code>_ga</code>, <code>_fbp</code>, …) disappear from Application → Cookies and the page reloads with everything blocked.</li>
+            <li>On a phone-sized viewport the banner spans the width and the buttons stack.</li>
+          </ul>
+        </li>
+      </ol>
+    </section>
+
+    </main>
+
+    <footer class="b-footer">
+      <div class="b-pad b-footer_row">
+        <a class="b-by" href="https://povio.com" target="_blank" rel="noopener" aria-label="Built by Povio">
+          <span>Built by</span>
+          <svg class="b-by_logo" viewBox="0 0 82 32" aria-hidden="true" focusable="false">
+            <path d="M10.1738 5.44751C15.2203 5.44751 19.3309 9.75897 19.3477 15.0227C19.3475 20.3532 15.237 24.6809 10.1738 24.6809C7.46687 24.6642 4.94347 23.428 3.27246 21.3059V32.0002H1V15.0393C1 9.7589 5.11067 5.44757 10.1738 5.44751ZM10.1738 7.76977C6.36394 7.76984 3.27246 11.0289 3.27246 15.0393C3.27257 19.0998 6.36401 22.4084 10.1738 22.4084C13.967 22.4084 17.0584 19.0998 17.0752 15.0393C17.0752 11.0288 13.9838 7.76977 10.1738 7.76977Z" fill="currentColor"/>
+            <path d="M46.4853 24.1963H48.5407L55.6259 6.04894H53.1694L47.5214 20.5702L41.8566 6.04894H39.4002L46.4686 24.1462L46.4853 24.1963Z" fill="currentColor"/>
+            <path d="M58.4499 0C57.5475 0 56.829 0.735252 56.829 1.6209C56.829 2.50654 57.5642 3.24179 58.4499 3.24179C59.3355 3.24179 60.0708 2.50654 60.0708 1.6209C60.0708 0.735252 59.3522 0 58.4499 0Z" fill="currentColor"/>
+            <path d="M57.2969 6.04894H59.5862V24.1629H57.2969V6.04894Z" fill="currentColor"/>
+            <path d="M71.1831 5.44751C76.2463 5.44751 80.3735 9.80921 80.3735 15.1565C80.3734 20.4368 76.2295 24.7307 71.1831 24.7307C66.1367 24.7307 62.0261 20.4368 62.0259 15.1565C62.0259 9.80921 66.1366 5.44751 71.1831 5.44751ZM71.1831 7.65356C67.3899 7.65356 64.2983 11.0291 64.2983 15.1565C64.2986 19.2169 67.39 22.5256 71.1831 22.5256C74.9762 22.5256 78.0676 19.2169 78.0679 15.1565C78.0679 11.0124 74.9763 7.65358 71.1831 7.65356Z" fill="currentColor"/>
+            <path d="M30.3934 5.44751C35.4733 5.44751 39.5838 9.80921 39.5838 15.1565C39.5836 20.4368 35.4398 24.7307 30.3934 24.7307C25.347 24.7307 21.2363 20.4368 21.2361 15.1565C21.2361 9.80921 25.3469 5.44751 30.3934 5.44751ZM30.3934 7.65356C26.6002 7.65359 23.5086 11.0291 23.5086 15.1565C23.5088 19.2169 26.6003 22.5256 30.3934 22.5256C34.2032 22.5256 37.2779 19.2169 37.2781 15.1565C37.2781 11.0123 34.1866 7.65356 30.3934 7.65356Z" fill="currentColor"/>
+          </svg>
+        </a>
+      </div>
+    </footer>
+  </div>
+
+  <div class="doc-preview-bar" id="preview-bar" hidden>
+    <span>Live preview</span>
+    <span class="doc-preview-bar_group" role="group" aria-label="Visitor region">
+      <button type="button" class="doc-preview-bar_chip is-active" data-preview-region="eu">EU</button>
+      <button type="button" class="doc-preview-bar_chip" data-preview-region="us-ca">California</button>
+      <button type="button" class="doc-preview-bar_chip" data-preview-region="us-ny">New York</button>
+    </span>
+    <button type="button" class="doc-preview-bar_btn" data-preview="restart">Show banner again</button>
+    <button type="button" class="doc-preview-bar_btn doc-preview-bar_btn--primary" data-preview="exit">Exit preview</button>
+  </div>
+
+  <div class="tc-root" data-tc="root">
+    <div class="tc-banner" data-tc="banner" role="dialog" aria-labelledby="tc-banner-title" aria-describedby="tc-banner-text">
+      <div class="tc-banner_body">
+        <div class="tc-brand">
+          <span class="tc-brand_mark" aria-hidden="true"></span>
+          <h2 class="tc-title" id="tc-banner-title">We use cookies</h2>
+        </div>
+        <!-- data-tc-variant lists the policies an element shows under: opt-in (GDPR), opt-out (CCPA), none. -->
+        <p class="tc-text" id="tc-banner-text" data-tc-variant="opt-in none">
+          Essential cookies keep the site working. With your permission we also use analytics, marketing, and
+          personalization cookies. You can change your choice at any time.
+        </p>
+        <p class="tc-text" data-tc-variant="opt-out">
+          We use cookies for analytics, marketing, and personalization. You can opt out of the sale or sharing of your
+          personal information at any time.
+        </p>
+        <a href="#" class="tc-link">Privacy policy</a>
+      </div>
+      <div class="tc-actions">
+        <button type="button" class="tc-button tc-button--ghost" data-tc-action="reject-all" data-tc-variant="opt-in none">Reject all</button>
+        <button type="button" class="tc-button tc-button--ghost" data-tc-action="reject-all" data-tc-variant="opt-out">Do not sell or share</button>
+        <button type="button" class="tc-button tc-button--ghost" data-tc-action="open-preferences">Preferences</button>
+        <button type="button" class="tc-button" data-tc-action="accept-all" data-tc-variant="opt-in none">Accept all</button>
+        <button type="button" class="tc-button" data-tc-action="accept-all" data-tc-variant="opt-out">OK</button>
+      </div>
+    </div>
+
+    <div class="tc-preferences" data-tc="preferences">
+      <div class="tc-backdrop" data-tc-action="close"></div>
+      <div class="tc-dialog" role="dialog" aria-modal="true" aria-labelledby="tc-prefs-title">
+        <button type="button" class="tc-close" data-tc-action="close" aria-label="Close">
+          <div class="tc-close_icon">
+            <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M4.3 3.3a.7.7 0 0 0-1 1L7 8l-3.7 3.7a.7.7 0 1 0 1 1L8 9l3.7 3.7a.7.7 0 0 0 1-1L9 8l3.7-3.7a.7.7 0 0 0-1-1L8 7 4.3 3.3z"/></svg>
+          </div>
+        </button>
+        <h2 class="tc-title" id="tc-prefs-title">Cookie preferences</h2>
+        <p class="tc-text">Choose which cookies you allow. You can change this at any time from the footer.</p>
+
+        <!--
+          One row per category. The row is an accordion: the chevron button toggles the vendor list
+          (data-tc-element="details"). Each vendor is a nested accordion with its cookie table.
+          The switch is a checkbox field: the input carries the category name, the label is hidden,
+          the knob is a plain div. The vendor block in each row (data-tc-vendor="sample") is a template:
+          on the published site the script detects the trackers on the page and clones it once per
+          vendor, filling the data-tc-field slots; the sample itself is removed. A block with any other
+          data-tc-vendor value is hand-written and kept. The empty message shows when nothing was found.
+          The Essential row ships open and the Analytics switch ships on so the state combos paste too.
+        -->
+        <form class="tc-form">
+          <div class="tc-row is-open" data-tc-category="essential" data-tc-element="accordion" data-tc-open="true">
+            <div class="tc-row_head">
+              <button type="button" class="tc-chevron is-open" data-tc-action="toggle" aria-label="Show details" aria-expanded="true">
+                <div class="tc-chevron_icon is-open" data-tc-element="chevron">
+                  <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3.2 5.7a1 1 0 0 1 1.4 0L8 9.1l3.4-3.4a1 1 0 1 1 1.4 1.4l-4.1 4.1a1 1 0 0 1-1.4 0L3.2 7.1a1 1 0 0 1 0-1.4z"/></svg>
+                </div>
+              </button>
+              <div class="tc-row_title" data-tc-action="toggle">Essential</div>
+              <div class="tc-badge">Always active</div>
+            </div>
+            <p class="tc-row_desc">Required for the site to work. Always on.</p>
+            <div class="tc-row_body" data-tc-element="details">
+              <!-- Template: the script clones this block once per detected vendor and removes the sample. -->
+              <div class="tc-vendor" data-tc-element="accordion" data-tc-vendor="sample">
+                <div class="tc-vendor_head" data-tc-action="toggle">
+                  <div class="tc-vendor_text">
+                    <div class="tc-vendor_name" data-tc-field="vendor-name">Tiny Consent</div>
+                    <a href="#" class="tc-vendor_link" data-tc-field="vendor-privacy">Privacy policy</a>
+                  </div>
+                  <button type="button" class="tc-chevron" data-tc-action="toggle" aria-label="Show cookies" aria-expanded="false">
+                    <div class="tc-chevron_icon" data-tc-element="chevron">
+                      <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3.2 5.7a1 1 0 0 1 1.4 0L8 9.1l3.4-3.4a1 1 0 1 1 1.4 1.4l-4.1 4.1a1 1 0 0 1-1.4 0L3.2 7.1a1 1 0 0 1 0-1.4z"/></svg>
+                    </div>
+                  </button>
+                </div>
+                <div class="tc-vendor_body" data-tc-element="details">
+                  <div class="tc-cookie" data-tc-field="cookie">
+                    <div class="tc-cookie_row"><div class="tc-cookie_key">Name</div><div class="tc-cookie_val" data-tc-field="cookie-name">tc_consent</div></div>
+                    <div class="tc-cookie_row"><div class="tc-cookie_key">Purpose</div><div class="tc-cookie_val" data-tc-field="cookie-purpose">Stores the cookie choices you make here.</div></div>
+                    <div class="tc-cookie_row"><div class="tc-cookie_key">Duration</div><div class="tc-cookie_val" data-tc-field="cookie-duration">180 days</div></div>
+                  </div>
+                </div>
+              </div>
+              <p class="tc-row_empty" data-tc-field="empty">No services from this category were found on this page.</p>
+            </div>
+          </div>
+
+          <div class="tc-row" data-tc-category="analytics" data-tc-element="accordion">
+            <div class="tc-row_head">
+              <button type="button" class="tc-chevron" data-tc-action="toggle" aria-label="Show details" aria-expanded="false">
+                <div class="tc-chevron_icon" data-tc-element="chevron">
+                  <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3.2 5.7a1 1 0 0 1 1.4 0L8 9.1l3.4-3.4a1 1 0 1 1 1.4 1.4l-4.1 4.1a1 1 0 0 1-1.4 0L3.2 7.1a1 1 0 0 1 0-1.4z"/></svg>
+                </div>
+              </button>
+              <div class="tc-row_title" data-tc-action="toggle">Analytics</div>
+              <div class="tc-switch is-on" data-tc-element="switch">
+                <input type="checkbox" class="tc-switch_input is-on" id="tc-analytics" name="Analytics" role="switch" />
+                <label class="tc-switch_label is-on" for="tc-analytics">Analytics</label>
+                <div class="tc-switch_knob is-on"></div>
+              </div>
+            </div>
+            <p class="tc-row_desc">Help us understand how the site is used.</p>
+            <div class="tc-row_body" data-tc-element="details">
+              <!-- Template: the script clones this block once per detected vendor and removes the sample. -->
+              <div class="tc-vendor" data-tc-element="accordion" data-tc-vendor="sample">
+                <div class="tc-vendor_head" data-tc-action="toggle">
+                  <div class="tc-vendor_text">
+                    <div class="tc-vendor_name" data-tc-field="vendor-name">Google Analytics</div>
+                    <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" class="tc-vendor_link" data-tc-field="vendor-privacy">Privacy policy</a>
+                  </div>
+                  <button type="button" class="tc-chevron" data-tc-action="toggle" aria-label="Show cookies" aria-expanded="false">
+                    <div class="tc-chevron_icon" data-tc-element="chevron">
+                      <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3.2 5.7a1 1 0 0 1 1.4 0L8 9.1l3.4-3.4a1 1 0 1 1 1.4 1.4l-4.1 4.1a1 1 0 0 1-1.4 0L3.2 7.1a1 1 0 0 1 0-1.4z"/></svg>
+                    </div>
+                  </button>
+                </div>
+                <div class="tc-vendor_body" data-tc-element="details">
+                  <div class="tc-cookie" data-tc-field="cookie">
+                    <div class="tc-cookie_row"><div class="tc-cookie_key">Name</div><div class="tc-cookie_val" data-tc-field="cookie-name">_ga, _ga_*</div></div>
+                    <div class="tc-cookie_row"><div class="tc-cookie_key">Purpose</div><div class="tc-cookie_val" data-tc-field="cookie-purpose">Tells returning visitors and sessions apart.</div></div>
+                    <div class="tc-cookie_row"><div class="tc-cookie_key">Duration</div><div class="tc-cookie_val" data-tc-field="cookie-duration">2 years</div></div>
+                  </div>
+                </div>
+              </div>
+              <p class="tc-row_empty" data-tc-field="empty">No services from this category were found on this page.</p>
+            </div>
+          </div>
+
+          <div class="tc-row" data-tc-category="marketing" data-tc-element="accordion">
+            <div class="tc-row_head">
+              <button type="button" class="tc-chevron" data-tc-action="toggle" aria-label="Show details" aria-expanded="false">
+                <div class="tc-chevron_icon" data-tc-element="chevron">
+                  <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3.2 5.7a1 1 0 0 1 1.4 0L8 9.1l3.4-3.4a1 1 0 1 1 1.4 1.4l-4.1 4.1a1 1 0 0 1-1.4 0L3.2 7.1a1 1 0 0 1 0-1.4z"/></svg>
+                </div>
+              </button>
+              <div class="tc-row_title" data-tc-action="toggle">Marketing</div>
+              <div class="tc-switch" data-tc-element="switch">
+                <input type="checkbox" class="tc-switch_input" id="tc-marketing" name="Marketing" role="switch" />
+                <label class="tc-switch_label" for="tc-marketing">Marketing</label>
+                <div class="tc-switch_knob"></div>
+              </div>
+            </div>
+            <p class="tc-row_desc">Ads, pixels, and embedded media from third parties.</p>
+            <div class="tc-row_body" data-tc-element="details">
+              <!-- Template: the script clones this block once per detected vendor and removes the sample. -->
+              <div class="tc-vendor" data-tc-element="accordion" data-tc-vendor="sample">
+                <div class="tc-vendor_head" data-tc-action="toggle">
+                  <div class="tc-vendor_text">
+                    <div class="tc-vendor_name" data-tc-field="vendor-name">Meta Pixel</div>
+                    <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener" class="tc-vendor_link" data-tc-field="vendor-privacy">Privacy policy</a>
+                  </div>
+                  <button type="button" class="tc-chevron" data-tc-action="toggle" aria-label="Show cookies" aria-expanded="false">
+                    <div class="tc-chevron_icon" data-tc-element="chevron">
+                      <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3.2 5.7a1 1 0 0 1 1.4 0L8 9.1l3.4-3.4a1 1 0 1 1 1.4 1.4l-4.1 4.1a1 1 0 0 1-1.4 0L3.2 7.1a1 1 0 0 1 0-1.4z"/></svg>
+                    </div>
+                  </button>
+                </div>
+                <div class="tc-vendor_body" data-tc-element="details">
+                  <div class="tc-cookie" data-tc-field="cookie">
+                    <div class="tc-cookie_row"><div class="tc-cookie_key">Name</div><div class="tc-cookie_val" data-tc-field="cookie-name">_fbp</div></div>
+                    <div class="tc-cookie_row"><div class="tc-cookie_key">Purpose</div><div class="tc-cookie_val" data-tc-field="cookie-purpose">Attributes conversions back to Meta ads.</div></div>
+                    <div class="tc-cookie_row"><div class="tc-cookie_key">Duration</div><div class="tc-cookie_val" data-tc-field="cookie-duration">90 days</div></div>
+                  </div>
+                </div>
+              </div>
+              <p class="tc-row_empty" data-tc-field="empty">No services from this category were found on this page.</p>
+            </div>
+          </div>
+
+          <div class="tc-row" data-tc-category="personalization" data-tc-element="accordion">
+            <div class="tc-row_head">
+              <button type="button" class="tc-chevron" data-tc-action="toggle" aria-label="Show details" aria-expanded="false">
+                <div class="tc-chevron_icon" data-tc-element="chevron">
+                  <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3.2 5.7a1 1 0 0 1 1.4 0L8 9.1l3.4-3.4a1 1 0 1 1 1.4 1.4l-4.1 4.1a1 1 0 0 1-1.4 0L3.2 7.1a1 1 0 0 1 0-1.4z"/></svg>
+                </div>
+              </button>
+              <div class="tc-row_title" data-tc-action="toggle">Personalization</div>
+              <div class="tc-switch" data-tc-element="switch">
+                <input type="checkbox" class="tc-switch_input" id="tc-personalization" name="Personalization" role="switch" />
+                <label class="tc-switch_label" for="tc-personalization">Personalization</label>
+                <div class="tc-switch_knob"></div>
+              </div>
+            </div>
+            <p class="tc-row_desc">Remember your choices and tailor content.</p>
+            <div class="tc-row_body" data-tc-element="details">
+              <!-- Template: the script clones this block once per detected vendor and removes the sample. -->
+              <div class="tc-vendor" data-tc-element="accordion" data-tc-vendor="sample">
+                <div class="tc-vendor_head" data-tc-action="toggle">
+                  <div class="tc-vendor_text">
+                    <div class="tc-vendor_name" data-tc-field="vendor-name">Intercom</div>
+                    <a href="https://www.intercom.com/legal/privacy" target="_blank" rel="noopener" class="tc-vendor_link" data-tc-field="vendor-privacy">Privacy policy</a>
+                  </div>
+                  <button type="button" class="tc-chevron" data-tc-action="toggle" aria-label="Show cookies" aria-expanded="false">
+                    <div class="tc-chevron_icon" data-tc-element="chevron">
+                      <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3.2 5.7a1 1 0 0 1 1.4 0L8 9.1l3.4-3.4a1 1 0 1 1 1.4 1.4l-4.1 4.1a1 1 0 0 1-1.4 0L3.2 7.1a1 1 0 0 1 0-1.4z"/></svg>
+                    </div>
+                  </button>
+                </div>
+                <div class="tc-vendor_body" data-tc-element="details">
+                  <div class="tc-cookie" data-tc-field="cookie">
+                    <div class="tc-cookie_row"><div class="tc-cookie_key">Name</div><div class="tc-cookie_val" data-tc-field="cookie-name">intercom-id-*</div></div>
+                    <div class="tc-cookie_row"><div class="tc-cookie_key">Purpose</div><div class="tc-cookie_val" data-tc-field="cookie-purpose">Keeps your chat history across visits.</div></div>
+                    <div class="tc-cookie_row"><div class="tc-cookie_key">Duration</div><div class="tc-cookie_val" data-tc-field="cookie-duration">9 months</div></div>
+                  </div>
+                </div>
+              </div>
+              <p class="tc-row_empty" data-tc-field="empty">No services from this category were found on this page.</p>
+            </div>
+          </div>
+        </form>
+
+        <div class="tc-actions">
+          <button type="button" class="tc-button tc-button--ghost" data-tc-action="reject-all">Reject all</button>
+          <button type="button" class="tc-button tc-button--ghost" data-tc-action="save">Save selection</button>
+          <button type="button" class="tc-button" data-tc-action="accept-all">Accept all</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Persistent entry point, bottom-left. The script shows it once a choice exists and no panel is open. -->
+    <button type="button" class="tc-float" data-tc="float" data-tc-action="open-preferences" aria-label="Open cookie preferences">
+      <div class="tc-float_icon">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2a10 10 0 1 0 10 10c0-.6-.5-1-1.1-1a3 3 0 0 1-3.4-3.5c.1-.6-.4-1.1-1-1.1A3 3 0 0 1 13.2 3 1 1 0 0 0 12 2zM9 8a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-1 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm6.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/></svg>
+      </div>
+      <div class="tc-float_label">Preferences</div>
+    </button>
+  </div>
+
+  <script src="./webflow-paste.js"></script>
+  <script src="./docs.js"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+// Default tracker hosts and the category each one needs.
+// A pattern matches the hostname itself and every subdomain. A pattern with a
+// path (`www.google.com/maps`) also requires that path prefix.
+// Entries added through `data-tc-block` on the script tag are checked first.
+
+export default [
+  // analytics
+  ['google-analytics.com', 'analytics'],
+  ['analytics.google.com', 'analytics'],
+  ['googletagmanager.com', 'analytics'],
+  ['hotjar.com', 'analytics'],
+  ['clarity.ms', 'analytics'],
+  ['mixpanel.com', 'analytics'],
+  ['segment.com', 'analytics'],
+  ['segment.io', 'analytics'],
+  ['amplitude.com', 'analytics'],
+  ['heapanalytics.com', 'analytics'],
+  ['fullstory.com', 'analytics'],
+  ['mouseflow.com', 'analytics'],
+  ['matomo.cloud', 'analytics'],
+  ['plausible.io', 'analytics'],
+  ['usefathom.com', 'analytics'],
+  ['posthog.com', 'analytics'],
+  ['luckyorange.com', 'analytics'],
+  ['smartlook.com', 'analytics'],
+
+  // marketing
+  ['connect.facebook.net', 'marketing'],
+  ['facebook.com', 'marketing'],
+  ['doubleclick.net', 'marketing'],
+  ['googleadservices.com', 'marketing'],
+  ['googlesyndication.com', 'marketing'],
+  ['ads.linkedin.com', 'marketing'],
+  ['snap.licdn.com', 'marketing'],
+  ['ads-twitter.com', 'marketing'],
+  ['analytics.tiktok.com', 'marketing'],
+  ['bat.bing.com', 'marketing'],
+  ['pinimg.com', 'marketing'],
+  ['pinterest.com', 'marketing'],
+  ['hs-scripts.com', 'marketing'],
+  ['hs-analytics.net', 'marketing'],
+  ['hsforms.net', 'marketing'],
+  ['sc-static.net', 'marketing'],
+  ['tr.snapchat.com', 'marketing'],
+  ['redditstatic.com', 'marketing'],
+  ['adroll.com', 'marketing'],
+  ['criteo.com', 'marketing'],
+  ['criteo.net', 'marketing'],
+  ['youtube.com', 'marketing'],
+  ['youtube-nocookie.com', 'marketing'],
+  ['vimeo.com', 'marketing'],
+  ['maps.googleapis.com', 'marketing'],
+  ['maps.google.com', 'marketing'],
+  ['www.google.com/maps', 'marketing'],
+
+  // personalization
+  ['intercom.io', 'personalization'],
+  ['intercomcdn.com', 'personalization'],
+  ['crisp.chat', 'personalization'],
+  ['drift.com', 'personalization'],
+  ['driftt.com', 'personalization'],
+  ['optimizely.com', 'personalization'],
+  ['visualwebsiteoptimizer.com', 'personalization'],
+  ['tawk.to', 'personalization'],
+];

@@ -1,0 +1,21 @@
+{
+  "name": "tiny-consent",
+  "version": "1.0.0",
+  "description": "A small first-party cookie consent script with a Designer-editable Webflow component.",
+  "type": "module",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "node build.mjs --serve",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0",
+    "jsdom": "^25.0.0",
+    "vitest": "^2.1.0"
+  }
+}
