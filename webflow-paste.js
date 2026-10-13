@@ -1,5 +1,5 @@
 // Builds a Webflow clipboard payload (@webflow/XscpData) from the component tree in
-// index.html (the one the live preview uses) and the class rules in tiny-consent-theme.css,
+// index.html (the one the live preview uses) and the @tc-component section of styles.css,
 // so the Designer paste always matches the reference. Also builds a plain HTML embed as a fallback.
 //
 // Node shapes follow what the Designer itself puts on the clipboard:
@@ -572,18 +572,26 @@
 
   // ---------- Sources and clipboard ----------
 
+  /** Page styles share styles.css. The paste and HTML embed use only the component section. */
+  function componentCss(text) {
+    const start = text.indexOf('/* @tc-component */');
+    const end = text.indexOf('/* @tc-page */');
+    if (start < 0 || end <= start) throw new Error('styles.css is missing the @tc-component section');
+    return text.slice(start, end);
+  }
+
   async function loadSources(base) {
     const prefix = base || './';
     const [html, css] = await Promise.all([
       fetch(prefix + 'index.html').then((r) => r.text()),
-      fetch(prefix + 'tiny-consent-theme.css').then((r) => r.text()),
+      fetch(prefix + 'styles.css').then((r) => r.text()),
     ]);
     // The pristine markup is fetched rather than read from the live document, because the
     // script running on the docs page mutates its copy (state attributes, generated vendors).
     const doc = new DOMParser().parseFromString(html, 'text/html');
     const root = doc.querySelector('[data-tc="root"]');
     if (!root) throw new Error('index.html has no [data-tc="root"] element');
-    return { root, css };
+    return { root, css: componentCss(css) };
   }
 
   /** Must run inside a user gesture: Webflow reads a JSON MIME type that only the copy event can set. */

@@ -1,4 +1,5 @@
 // @vitest-environment jsdom
+import { readFileSync } from 'node:fs';
 import { describe, it, expect } from 'vitest';
 import '../webflow-paste.js';
 
@@ -317,5 +318,18 @@ describe('webflow paste: policy variants', () => {
     const root = variantRoot();
     paste.build({ root, css: CSS, policies: ['opt-out'] });
     expect(root.querySelectorAll('[data-tc-variant="opt-in none"]')).toHaveLength(2);
+  });
+});
+
+describe('styles.css', () => {
+  it('keeps page styles out of the component section the paste reads', () => {
+    const css = readFileSync('styles.css', 'utf8');
+    const start = css.indexOf('/* @tc-component */');
+    const end = css.indexOf('/* @tc-page */');
+    expect(start).toBe(0);
+    expect(end).toBeGreaterThan(start);
+    const component = css.slice(start, end);
+    expect(component).toContain('.tc-banner');
+    expect(component).not.toMatch(/\.doc-|\.demo-|\.b-/);
   });
 });

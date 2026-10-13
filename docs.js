@@ -43,7 +43,7 @@
 
   // ---------- Head code configurator ----------
 
-  const SCRIPT_URL = 'https://cdn.jsdelivr.net/gh/mio31337/tiny-consent@v1.0.0/dist/tiny-consent.min.js';
+  const SCRIPT_URL = 'https://cdn.jsdelivr.net/gh/povio/tiny-consent@1/dist/tiny-consent.min.js';
   const config = document.getElementById('config');
   const headSnippet = document.getElementById('head-snippet');
   let scannedVendorIds = [];
@@ -141,7 +141,34 @@
   const copyWebflow = document.getElementById('copy-webflow');
   const copyEmbed = document.getElementById('copy-embed');
   const status = document.getElementById('paste-status');
+  const heroDemo = document.getElementById('hero-demo');
   let sources = null;
+
+  function replayHero(scroll) {
+    if (!heroDemo) return;
+    const play = () => {
+      window.removeEventListener('scroll', onScroll);
+      clearTimeout(replayHero._timer);
+      heroDemo.classList.remove('is-in');
+      void heroDemo.offsetWidth;
+      heroDemo.classList.add('is-in');
+    };
+    function onScroll() {
+      const rect = heroDemo.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.72 && rect.bottom > 60) play();
+    }
+    const rect = heroDemo.getBoundingClientRect();
+    const visible = rect.top >= 0 && rect.bottom <= window.innerHeight;
+    if (!scroll || visible) {
+      play();
+      return;
+    }
+    heroDemo.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    window.addEventListener('scroll', onScroll, { passive: true });
+    replayHero._timer = setTimeout(play, 700);
+  }
+
+  replayHero(false);
 
   function setStatus(text, kind) {
     status.textContent = text;
@@ -188,6 +215,7 @@
       const payload = paste.build(pasteSources());
       const bytes = paste.writeWebflowClipboard(payload);
       setStatus(`Copied for Webflow (${Math.round(bytes / 1024)} KB). Select the footer in the Designer and paste.`, 'ok');
+      replayHero(true);
     } catch (error) {
       setStatus(error.message, 'error');
     }

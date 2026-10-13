@@ -12,8 +12,7 @@ A small first-party cookie consent kit for Webflow projects. One static script b
 - `src/` script source (`tiny-consent.js` entry, `consent.js`, `blocker.js`, `ui.js`, `blocklist.js`, `vendors.js`, `cleanup.js`, `geo.js`)
 - `dist/` built bundle to host (`tiny-consent.js`, `tiny-consent.min.js`)
 - `index.html` onboarding docs: the setup steps with copy buttons, a head-code configurator, **Copy component for Webflow**, and a live preview of the component (the exact tree, driven by the real script)
-- `webflow-paste.js` turns the component tree in `index.html` and `tiny-consent-theme.css` into a Webflow clipboard payload
-- `clipboard-inspector.html` shows what any clipboard holds, for checking the Webflow format
+- `webflow-paste.js` turns the component tree in `index.html` and the component section of `styles.css` into a Webflow clipboard payload
 - `test/` Vitest suite
 
 ```sh
@@ -27,14 +26,14 @@ The docs page is the shortest path: open `npm run dev`, follow the six steps, an
 
 ## 1. Host the script once
 
-Upload `dist/tiny-consent.min.js` to any static host (Cloudflare Pages, Netlify, S3, your own domain). Every Webflow site points at that one URL, so a fix ships to all projects at once. Add a long cache lifetime and bump the filename when you release.
+The script is published on jsDelivr from this repo. `@1` includes later 1.x releases. Use `@main` when a site should follow the latest build. To host it yourself, upload `dist/tiny-consent.min.js` and point the script tag at that file.
 
 ## 2. Install on a Webflow site
 
 Site settings → Custom code → **Head code**. Put this first, before any analytics or pixel snippet, with no `async` or `defer`:
 
 ```html
-<script src="https://cdn.your-domain.com/tiny-consent.min.js"
+<script src="https://cdn.jsdelivr.net/gh/povio/tiny-consent@1/dist/tiny-consent.min.js"
         data-tc-mode="opt-in"
         data-tc-cookie-days="180"></script>
 ```
@@ -91,9 +90,9 @@ Remove `<noscript>` fallbacks from tracker snippets. They fire without consent.
 
 On the docs page (`npm run dev`, step 4) press **Copy component for Webflow**. The clipboard then holds the component in Webflow's own clipboard format (`@webflow/XscpData`): native Div, Heading, Paragraph, Button, and Checkbox elements, one class per element with the default theme values, and all `data-tc` attributes set. In the Designer, select the footer (or any component that is on every page), enter the component, and paste.
 
-The payload is generated from the component tree in `index.html` plus `tiny-consent-theme.css`, so it always matches the live preview. During generation `var()` becomes the default value, `color-mix()` becomes `rgba()`, `:hover` becomes the Hover state, and the `max-width: 560px` media query becomes the Tablet/Mobile breakpoint. After pasting, swap the flat colors for your site's variables.
+The payload is generated from the component tree in `index.html` plus the component section of `styles.css`, so it always matches the live preview. During generation `var()` becomes the default value, `color-mix()` becomes `rgba()`, `:hover` becomes the Hover state, and the `max-width: 560px` media query becomes the Tablet/Mobile breakpoint. After pasting, swap the flat colors for your site's variables.
 
-If nothing appears, open `clipboard-inspector.html`, copy an element in the Designer, and paste into the inspector to see the exact MIME type and shape Webflow currently uses. **Copy as HTML embed** is the fallback: paste into a Code Embed element. Works instantly, not styleable in the Designer.
+If nothing appears, **Copy as HTML embed** is the fallback: paste into a Code Embed element. Works instantly, not styleable in the Designer.
 
 ### Or build it by hand
 
@@ -189,7 +188,7 @@ Per-site additions and overrides go in Head code before or after the script:
 
 ## 5. Brand it per project
 
-`tiny-consent-theme.css` styles the component with seven custom properties:
+`styles.css` styles the component with seven custom properties:
 
 ```css
 --tc-font       font family
