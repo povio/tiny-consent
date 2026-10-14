@@ -612,7 +612,9 @@
     scratch.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;';
     document.body.appendChild(scratch);
     const active = document.activeElement;
-    scratch.focus();
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    scratch.focus({ preventScroll: true });
     scratch.select();
     document.addEventListener('copy', onCopy);
     try {
@@ -620,7 +622,8 @@
     } finally {
       document.removeEventListener('copy', onCopy);
       scratch.remove();
-      if (active && active.focus) active.focus();
+      if (active && active.focus) active.focus({ preventScroll: true });
+      window.scrollTo(scrollX, scrollY);
     }
     if (!ok) {
       // Without window focus Chrome disables execCommand. Leave the JSON on the clipboard as

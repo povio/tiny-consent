@@ -54,11 +54,12 @@
 		const rule = String(data.get('mode') || 'opt-in');
 		const days = Number(data.get('days')) || 180;
 		const block = String(data.get('block') || '').trim();
-		// Only emit attributes that differ from the script's defaults (opt-in, 180 days).
+		// Opt-in is the script default, and the attribute is written out so the pasted tag shows it.
 		const lines = [`<script src="${url}"`];
 		if (rule === 'opt-out') lines.push(`        data-tc-mode="opt-out"`);
-		if (rule === 'geo') lines.push(`        data-tc-geo="auto"`);
-		if (rule === 'geo-timezone') lines.push(`        data-tc-geo="timezone"`);
+		else if (rule === 'geo') lines.push(`        data-tc-geo="auto"`);
+		else if (rule === 'geo-timezone') lines.push(`        data-tc-geo="timezone"`);
+		else lines.push(`        data-tc-mode="opt-in"`);
 		if (days !== 180) lines.push(`        data-tc-cookie-days="${days}"`);
 		if (block) lines.push(`        data-tc-block="${block.replace(/"/g, '')}"`);
 		if (scannedVendorIds.length) lines.push(`        data-tc-vendors="${scannedVendorIds.join(', ')}"`);
@@ -142,31 +143,14 @@
 	const heroDemo = document.getElementById('hero-demo');
 	let sources = null;
 
-	function replayHero(scroll) {
+	function replayHero() {
 		if (!heroDemo) return;
-		const play = () => {
-			window.removeEventListener('scroll', onScroll);
-			clearTimeout(replayHero._timer);
-			heroDemo.classList.remove('is-in');
-			void heroDemo.offsetWidth;
-			heroDemo.classList.add('is-in');
-		};
-		function onScroll() {
-			const rect = heroDemo.getBoundingClientRect();
-			if (rect.top < window.innerHeight * 0.72 && rect.bottom > 60) play();
-		}
-		const rect = heroDemo.getBoundingClientRect();
-		const visible = rect.top >= 0 && rect.bottom <= window.innerHeight;
-		if (!scroll || visible) {
-			play();
-			return;
-		}
-		heroDemo.scrollIntoView({ behavior: 'smooth', block: 'center' });
-		window.addEventListener('scroll', onScroll, { passive: true });
-		replayHero._timer = setTimeout(play, 700);
+		heroDemo.classList.remove('is-in');
+		void heroDemo.offsetWidth;
+		heroDemo.classList.add('is-in');
 	}
 
-	replayHero(false);
+	replayHero();
 
 	function setStatus(text, kind) {
 		status.textContent = text;
@@ -213,7 +197,6 @@
 			const payload = paste.build(pasteSources());
 			const bytes = paste.writeWebflowClipboard(payload);
 			setStatus(`Copied for Webflow (${Math.round(bytes / 1024)} KB). Select the footer in the Designer and paste.`, 'ok');
-			replayHero(true);
 		} catch (error) {
 			setStatus(error.message, 'error');
 		}

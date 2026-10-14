@@ -6,6 +6,14 @@
   <title>Tiny Consent - For Webflow</title>
   <link rel="icon" href="./logo.svg" type="image/svg+xml" />
   <meta name="description" content="A cookie banner that is a native Webflow element. Paste it, select it, restyle it like anything else on the canvas." />
+  <meta property="og:title" content="Tiny Consent - For Webflow" />
+  <meta property="og:description" content="A cookie banner that is a native Webflow element. Paste it, select it, restyle it like anything else on the canvas." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://cdn.jsdelivr.net/gh/povio/tiny-consent@main/og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/povio/tiny-consent@main/og.png" />
   <script src="./dist/tiny-consent.js" data-tc-region="eu" data-tc-reload="false" data-tc-vendors="google-analytics, meta-pixel, intercom"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -326,7 +334,7 @@
             <summary>States and visibility while you work</summary>
             <ul class="doc-list">
               <li>Each optional category has a switch: a checkbox field (<code>tc-switch</code>) with an invisible input over a track and a knob. The script adds the combo class <code>is-on</code> to the switch and its children while the category is allowed, and <code>is-open</code> to an accordion, its toggles, and the chevron icon while it is open. Both combos arrive with the paste (the Analytics switch is on and the Essential row is open), so style the on and open states there.</li>
-              <li>Leave the banner visible in the Designer. On the published site the script hides it until it is needed. Hide the preferences panel and the Preferences button while you work and set them back to visible before publishing. Accordion bodies are visible in the Designer and start closed on the published site.</li>
+              <li>The pasted styles hide the preferences panel and the Preferences button, so a published page shows the banner. Opt-in is the head snippet's default (<code>data-tc-mode="opt-in"</code>): the script shows that banner on the first visit and the button only after a choice. Leave the banner's display alone. To style the panel or the button, set Display to Flex, then set it back to None before publishing. Accordion bodies are visible in the Designer and start closed on the published site.</li>
             </ul>
           </details>
           <details class="doc-details">
@@ -661,13 +669,13 @@
       </div>
     </div>
 
-    <!-- Persistent entry point, bottom-left. The script shows it once a choice exists and no panel is open. -->
-    <button type="button" class="tc-float" data-tc="float" data-tc-action="open-preferences" aria-label="Open cookie preferences">
+    <!-- Persistent entry point, bottom-left. A div, not a button, so Webflow keeps data-tc on the paste. The script shows it once a choice exists and no panel is open. -->
+    <div class="tc-float" data-tc="float" data-tc-action="open-preferences" role="button" tabindex="0" aria-label="Open cookie preferences">
       <div class="tc-float_icon">
         <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2a10 10 0 1 0 10 10c0-.6-.5-1-1.1-1a3 3 0 0 1-3.4-3.5c.1-.6-.4-1.1-1-1.1A3 3 0 0 1 13.2 3 1 1 0 0 0 12 2zM9 8a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-1 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm6.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/></svg>
       </div>
       <div class="tc-float_label">Preferences</div>
-    </button>
+    </div>
   </div>
 
   <script src="./webflow-paste.js"></script>
