@@ -52,7 +52,7 @@
           <div>
             <h1 class="b-h1">Cookie consent for Webflow sites you build.</h1>
             <div class="b-actions">
-              <a class="b-btn" href="#head">Start with step 1</a>
+              <a class="b-btn" href="#scan">Start with step 1</a>
               <button type="button" class="b-btn b-btn--ghost" data-preview="launch">Preview the banner</button>
             </div>
           </div>
@@ -103,13 +103,13 @@
           </div>
           <div class="doc-rail_bar" aria-hidden="true"><span id="rail-progress"></span></div>
           <ol class="doc-rail_list" id="rail">
-            <li class="doc-rail_item" data-step="head">
-              <input class="doc-rail_check" type="checkbox" id="done-head" aria-label="Mark step 1, add the head code, as done" />
-              <a class="doc-rail_link" href="#head"><span class="doc-rail_num">1</span><span class="doc-rail_name">Add the head code</span><span class="doc-rail_time">1 min</span></a>
-            </li>
             <li class="doc-rail_item" data-step="scan">
-              <input class="doc-rail_check" type="checkbox" id="done-scan" aria-label="Mark step 2, scan the site, as done" />
-              <a class="doc-rail_link" href="#scan"><span class="doc-rail_num">2</span><span class="doc-rail_name">Scan the site</span><span class="doc-rail_time">1 min</span></a>
+              <input class="doc-rail_check" type="checkbox" id="done-scan" aria-label="Mark step 1, scan the site, as done" />
+              <a class="doc-rail_link" href="#scan"><span class="doc-rail_num">1</span><span class="doc-rail_name">Scan the site</span><span class="doc-rail_time">1 min</span></a>
+            </li>
+            <li class="doc-rail_item" data-step="head">
+              <input class="doc-rail_check" type="checkbox" id="done-head" aria-label="Mark step 2, add the head code, as done" />
+              <a class="doc-rail_link" href="#head"><span class="doc-rail_num">2</span><span class="doc-rail_name">Add the head code</span><span class="doc-rail_time">1 min</span></a>
             </li>
             <li class="doc-rail_item" data-step="trackers">
               <input class="doc-rail_check" type="checkbox" id="done-trackers" aria-label="Mark step 3, tag your trackers, as done" />
@@ -135,17 +135,45 @@
       <ol class="doc-steps">
 
         <!-- Step 1 -->
-        <li class="doc-step" id="head" data-step="head">
+        <li class="doc-step" id="scan" data-step="scan">
           <header class="doc-step_head">
             <span class="doc-step_num" aria-hidden="true">1</span>
             <div class="doc-step_titles">
-              <h2>Add the head code</h2>
-              <p class="doc-step_meta"><span class="doc-step_time">1 min</span><span class="doc-step_where">Site settings → Custom code → Head code</span></p>
+              <h2>Scan the site</h2>
             </div>
           </header>
           <p>
-            Copy the snippet and paste it as the <strong>first thing</strong> in Head code, above every analytics or
-            pixel snippet, with no <code>async</code> or <code>defer</code>.
+            Paste the live site address. The scan reads <code>sitemap.xml</code>, then the HTML of each page, and adds
+            every recognized tracker to the head snippet in the next step. On the published site those services show up
+            in the preferences panel on every page, including pages that do not contain the tag.
+          </p>
+          <form class="doc-scan" id="scan-form">
+            <label>
+              <span>Website</span>
+              <input type="text" name="url" inputmode="url" required placeholder="povio.com" autocomplete="url" spellcheck="false" />
+            </label>
+            <button type="submit" class="demo-btn">Scan</button>
+          </form>
+          <p class="doc-paste_status" id="scan-status" hidden></p>
+          <ul class="doc-scan_list" id="scan-list" hidden></ul>
+          <p class="doc-note">
+            When a page loads Google Tag Manager, the scan reads that container and includes the tags configured
+            there. A pixel that some other script injects only after the page runs is still invisible here. Add its
+            id to <code>data-tc-vendors</code> on the head snippet, or tag it in step 3.
+          </p>
+        </li>
+
+        <!-- Step 2 -->
+        <li class="doc-step" id="head" data-step="head">
+          <header class="doc-step_head">
+            <span class="doc-step_num" aria-hidden="true">2</span>
+            <div class="doc-step_titles">
+              <h2>Add the head code</h2>
+            </div>
+          </header>
+          <p>
+            The scan writes recognized services into this snippet. Copy it and paste it as the <strong>first thing</strong>
+            in Head code, above every analytics or pixel snippet, with no <code>async</code> or <code>defer</code>.
           </p>
           <form class="doc-config" id="config">
             <label>
@@ -215,43 +243,12 @@
           </p>
         </li>
 
-        <!-- Step 2 -->
-        <li class="doc-step" id="scan" data-step="scan">
-          <header class="doc-step_head">
-            <span class="doc-step_num" aria-hidden="true">2</span>
-            <div class="doc-step_titles">
-              <h2>Scan the site</h2>
-              <p class="doc-step_meta"><span class="doc-step_time">1 min</span><span class="doc-step_where">This page</span></p>
-            </div>
-          </header>
-          <p>
-            Paste the live site address. The scan reads <code>sitemap.xml</code>, then the HTML of each page, and adds
-            every recognized tracker to the head snippet. On the published site those services show up in the preferences
-            panel on every page, including pages that do not contain the tag.
-          </p>
-          <form class="doc-scan" id="scan-form">
-            <label>
-              <span>Website</span>
-              <input type="text" name="url" inputmode="url" required placeholder="povio.com" autocomplete="url" spellcheck="false" />
-            </label>
-            <button type="submit" class="demo-btn">Scan</button>
-          </form>
-          <p class="doc-paste_status" id="scan-status" hidden></p>
-          <ul class="doc-scan_list" id="scan-list" hidden></ul>
-          <p class="doc-note">
-            When a page loads Google Tag Manager, the scan reads that container and includes the tags configured
-            there. A pixel that some other script injects only after the page runs is still invisible here. Tag that
-            in the next step, or add its id to <code>data-tc-vendors</code> yourself.
-          </p>
-        </li>
-
         <!-- Step 3 -->
         <li class="doc-step" id="trackers" data-step="trackers">
           <header class="doc-step_head">
             <span class="doc-step_num" aria-hidden="true">3</span>
             <div class="doc-step_titles">
               <h2>Tag your trackers</h2>
-              <p class="doc-step_meta"><span class="doc-step_time">1 min</span><span class="doc-step_where">Head code and Code Embed elements</span></p>
             </div>
           </header>
           <p>
@@ -307,7 +304,6 @@
             <span class="doc-step_num" aria-hidden="true">4</span>
             <div class="doc-step_titles">
               <h2>Paste the component into the Designer</h2>
-              <p class="doc-step_meta"><span class="doc-step_time">1 min</span><span class="doc-step_where">Designer → your footer</span></p>
             </div>
           </header>
           <p>
@@ -385,7 +381,6 @@
             <span class="doc-step_num" aria-hidden="true">5</span>
             <div class="doc-step_titles">
               <h2>Add a "Cookie settings" link</h2>
-              <p class="doc-step_meta"><span class="doc-step_time">1 min</span><span class="doc-step_where">Designer → footer link → Element settings → Custom attributes</span></p>
             </div>
           </header>
           <p>
@@ -404,7 +399,6 @@
             <span class="doc-step_num" aria-hidden="true">6</span>
             <div class="doc-step_titles">
               <h2>Publish and test</h2>
-              <p class="doc-step_meta"><span class="doc-step_time">1 min</span><span class="doc-step_where">Your .webflow.io staging domain, in a private window</span></p>
             </div>
           </header>
           <p>Publish to staging first and walk through this list in a private window with DevTools open.</p>

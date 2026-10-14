@@ -3,7 +3,9 @@
 //   node build.mjs --serve  -> same, rebuilt on change, served at http://localhost:8787/
 //                              GET /api/scan?url= scans that site's sitemap for trackers
 
+import { cp, mkdir, rm } from 'node:fs/promises';
 import http from 'node:http';
+import { join } from 'node:path';
 import * as esbuild from 'esbuild';
 import { scanSite } from './scan-site.js';
 
@@ -37,6 +39,27 @@ async function handleScan(res, searchParams) {
   }
 }
 
+// Vercel serves public/. The docs page lives at the repo root, so the
+// deployable files are copied there after the bundle exists.
+const siteFiles = [
+  'index.html',
+  'styles.css',
+  'docs.js',
+  'webflow-paste.js',
+  'logo.svg',
+  'dist/tiny-consent.js',
+  'dist/tiny-consent.min.js',
+];
+
+async function publishSite() {
+  await rm('public', { recursive: true, force: true });
+  await Promise.all(siteFiles.map(async (file) => {
+    const dest = join('public', file);
+    await mkdir(join(dest, '..'), { recursive: true });
+    await cp(file, dest);
+  }));
+}
+
 if (serve) {
   const ctx = await esbuild.context(readable);
   await ctx.watch();
@@ -66,5 +89,7 @@ if (serve) {
   });
 } else {
   await Promise.all([esbuild.build(readable), esbuild.build(minified)]);
+  await publishSite();
   console.log('Built dist/tiny-consent.js and dist/tiny-consent.min.js');
+  console.log('Published the docs site to public/');
 }
