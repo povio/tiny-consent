@@ -1,6 +1,6 @@
 {
   "name": "tiny-consent",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A small first-party cookie consent script with a Designer-editable Webflow component.",
   "type": "module",
   "license": "MIT",

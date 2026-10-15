@@ -37,7 +37,7 @@ import { cookiePatternsFor, detectVendors } from './vendors.js';
 import { purgeCookies } from './cleanup.js';
 import { DEFAULT_REGIONS, POLICIES, createGeoResolver, parseRegionCode, parseRegions, policyFor } from './geo.js';
 
-const VERSION = '1.0.0';
+const VERSION = '1.0.1';
 
 // Injected only when the script runs, so the Designer canvas shows everything.
 // Elements with data-tc-variant="opt-in opt-out none" show only under the listed policies.

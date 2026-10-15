@@ -1074,7 +1074,7 @@
   }
 
   // src/tiny-consent.js
-  var VERSION2 = "1.0.0";
+  var VERSION2 = "1.0.1";
   var BOOT_CSS = [
     'html.tc-boot [data-tc="root"]:not([data-tc-visible="true"]),',
     'html.tc-boot [data-tc="banner"]:not([data-tc-visible="true"]),',
