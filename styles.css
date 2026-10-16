@@ -486,11 +486,6 @@
 		bottom: 12px;
 		padding: 10px 14px;
 	}
-
-	.tc-cookie_row {
-		flex-direction: column;
-		gap: 0;
-	}
 }
 
 /* @tc-page */
